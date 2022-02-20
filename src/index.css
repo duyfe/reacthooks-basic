@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.table {
+  @apply w-full;
+}
+.table th {
+  background: #202020;
+  color: white;
+}
+.table tr:nth-child(even) {
+  background: #b1b1b1;
+}
+.table tr:hover {
+  background: #cecece;
+}
+.table td,
+.table th {
+  padding: 10px 15px;
 }

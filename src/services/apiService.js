@@ -2,6 +2,7 @@ import axiosClient from "./axiosClient"
 
 class ApiService {
   formatErrors(error) {
+    // format error
     return error.error
   }
 

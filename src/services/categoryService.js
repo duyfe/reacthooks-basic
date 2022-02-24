@@ -1,8 +1,20 @@
-import apiService from "./apiService";
+import apiService from "./apiService"
+import queryString from 'query-string'
 
+const defaultParams = {
+  _page: 1,
+  _limit: 10,
+  _q: ''
+}
 class CategoryService {
-  getAll () {
-    return apiService.get('/categories')
+  getAll (props) {
+    const params = queryString.stringify(Object.assign({}, defaultParams, props))
+    return apiService.get(`/categories?${params}`).then(response => {
+      return {
+        data: response.data,
+        total: response.headers["x-total-count"]
+      }
+    })
   }
 
   get (id) {

@@ -4,12 +4,11 @@ import queryString from 'query-string'
 const defaultParams = {
   _page: 1,
   _limit: 10,
-  _q: ''
+  q: ''
 }
 class CategoryService {
   getAll (props) {
     const params = queryString.stringify(Object.assign({}, defaultParams, props))
-    console.log(params);
     return apiService.get(`/categories?${params}`).then(response => {
       return {
         data: response.data,

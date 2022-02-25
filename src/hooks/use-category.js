@@ -7,7 +7,7 @@ export function useCategory({ page, searchKey, limitItem}) {
 
    const getCategories = async () => {
      console.log('get categories');
-     const { data, total } = await categoryService.getAll({ _page: page, _q: searchKey, _limit: limitItem })
+     const { data, total } = await categoryService.getAll({ _page: page, _limit: limitItem, q: searchKey })
 
     setCategories(data)
     setTotalCount(total)

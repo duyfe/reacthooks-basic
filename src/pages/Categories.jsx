@@ -10,9 +10,9 @@ export const Categories = () => {
   const [page, setPage] = useState(0)
   const [searchKey, setSearchKey] = useState('')
   const [limitItem, setLimitItem] = useState(5)
-  
+  console.log('render categories');
   const { categories, totalCount, removeCategory } = useCategory({page: page + 1, searchKey, limitItem})
-  
+
   const handleRemove = async (id) => removeCategory(id)
 
   const handleEdit = (id) => {
@@ -47,7 +47,7 @@ export const Categories = () => {
           onPageChange={(_, page) => handlePageChange(page)}
           handleChangeRowsPerPage={(event) => handleChangeRowsPerPage(event.target.value)}
         />
-    ,[categories, totalCount, page, limitItem]
+    ,[categories, totalCount, page, limitItem, searchKey]
   )
 
   return (

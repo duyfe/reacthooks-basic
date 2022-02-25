@@ -9,6 +9,7 @@ const defaultParams = {
 class CategoryService {
   getAll (props) {
     const params = queryString.stringify(Object.assign({}, defaultParams, props))
+    console.log(params);
     return apiService.get(`/categories?${params}`).then(response => {
       return {
         data: response.data,

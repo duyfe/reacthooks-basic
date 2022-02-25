@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-const Filter = ({ onChange }) => {
+const FilterComponent = ({ onChange }) => {
   console.log('re-render filter');
   return (
     <div className="w-full mb-5">
@@ -8,7 +8,7 @@ const Filter = ({ onChange }) => {
         className="w-[300px] py-2 px-4 outline-none border rounded" 
         type="text" 
         name="search" 
-        id="search" 
+        id="search"
         onChange={e => onChange(e.target.value)}
         placeholder="Enter category name ..." 
       />
@@ -16,4 +16,4 @@ const Filter = ({ onChange }) => {
   )
 }
 
-export default memo(Filter)
+export default memo(FilterComponent)

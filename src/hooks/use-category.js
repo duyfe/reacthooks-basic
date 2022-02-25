@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import categoryService from "../services/categoryService";
 
-export function useCategory({ page, searchKey}) {
+export function useCategory({ page, searchKey, limitItem}) {
   const [categories, setCategories] = useState([])
   const [totalCount, setTotalCount] = useState(1)
 
    const getCategories = async () => {
      console.log('get categories');
-     const { data, total } = await categoryService.getAll({ _page: page, q: searchKey })
+     const { data, total } = await categoryService.getAll({ _page: page, _q: searchKey, _limit: limitItem })
 
     setCategories(data)
     setTotalCount(total)
@@ -21,7 +21,7 @@ export function useCategory({ page, searchKey}) {
 
   useEffect(() => {
     getCategories()
-  }, [page, searchKey])
+  }, [page, searchKey, limitItem])
 
   return {
     categories,

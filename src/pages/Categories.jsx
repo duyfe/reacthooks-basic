@@ -2,16 +2,16 @@ import React from "react";
 import { useState, useCallback, useMemo} from "react";
 import { useCategory } from "../hooks";
 
-import { Table, Filter} from '../components/categories'
-import { Pagination } from "../components/common";
+import { TableComponent, FilterComponent} from '../components/categories'
 
 export const Categories = () => {
-  
+
   let timeout = null;
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const [searchKey, setSearchKey] = useState('')
+  const [limitItem, setLimitItem] = useState(5)
   
-  const { categories, totalCount, removeCategory } = useCategory({ page, searchKey })
+  const { categories, totalCount, removeCategory } = useCategory({page: page + 1, searchKey, limitItem})
   
   const handleRemove = async (id) => removeCategory(id)
 
@@ -24,6 +24,8 @@ export const Categories = () => {
   }
     
   const handlePageChange = useCallback((p) => setPage(p),[page])
+
+  const handleChangeRowsPerPage = useCallback(value => setLimitItem(+value), [limitItem])
     
   const handeSearchChange = useCallback((value) => {
     clearTimeout(timeout);
@@ -35,15 +37,23 @@ export const Categories = () => {
     () => 
       categories.length === 0 
       ? <p>No Result</p> 
-      : <Table categories={categories} onRemove={handleRemove} onUpdate={handleUpdate} />
-    ,[categories]
+      : <TableComponent 
+          categories={categories} 
+          totalCount={+totalCount} 
+          currentPage={+page} 
+          limitItem={+limitItem}
+          onRemove={handleRemove} 
+          onUpdate={handleUpdate}
+          onPageChange={(_, page) => handlePageChange(page)}
+          handleChangeRowsPerPage={(event) => handleChangeRowsPerPage(event.target.value)}
+        />
+    ,[categories, totalCount, page, limitItem]
   )
 
   return (
     <>
-      <Filter onChange={handeSearchChange} />
+      <FilterComponent onChange={handeSearchChange} />
       {tableElement}
-      <Pagination totalCount={totalCount} currentPage={page} itemPerPage={10} onPageChange={handlePageChange} />
     </>
   )
 }

@@ -1,2 +1,2 @@
-export { Table } from './Table'
-export { default as Filter } from './Filter'
+export { default as TableComponent } from './Table'
+export { default as FilterComponent } from './Filter'
